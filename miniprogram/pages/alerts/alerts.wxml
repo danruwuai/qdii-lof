@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="header">
+    <text class="title">溢价提醒</text>
+    <button class="add-btn" bindtap="toggleForm">{{showForm ? '取消' : '+ 新建'}}</button>
+  </view>
+
+  <!-- Add form -->
+  <view class="form-card" wx:if="{{showForm}}">
+    <view class="form-row">
+      <text class="form-label">基金代码</text>
+      <input class="form-input" placeholder="如: 513500" value="{{formCode}}" bindinput="onCodeInput" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">溢价率高于(%)</text>
+      <input class="form-input" type="digit" placeholder="如: 5" value="{{formAbove}}" bindinput="onAboveInput" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">溢价率低于(%)</text>
+      <input class="form-input" type="digit" placeholder="如: -3" value="{{formBelow}}" bindinput="onBelowInput" />
+    </view>
+    <button class="submit-btn" bindtap="submitAlert">保存</button>
+  </view>
+
+  <!-- Alert list -->
+  <view class="alert-list">
+    <view class="alert-card {{!item.is_active ? 'inactive' : ''}}" wx:for="{{alerts}}" wx:key="id">
+      <view class="alert-info">
+        <text class="alert-code">{{item.fund_code}}</text>
+        <text class="alert-rule">
+          高于{{item.threshold_above != null ? item.threshold_above + '%' : '--'}}
+          / 低于{{item.threshold_below != null ? item.threshold_below + '%' : '--'}}
+        </text>
+      </view>
+      <view class="alert-actions">
+        <button class="toggle-btn" data-id="{{item.id}}" bindtap="toggleActive">{{item.is_active ? '已启用' : '已停用'}}</button>
+        <button class="delete-btn" data-id="{{item.id}}" bindtap="deleteAlert">删除</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{alerts.length === 0 && !showForm}}">
+    <text>暂无提醒规则</text>
+  </view>
+</view>

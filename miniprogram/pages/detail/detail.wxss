@@ -1,0 +1,156 @@
+.container {
+  padding: 20rpx;
+}
+
+.header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.fund-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  display: block;
+}
+
+.fund-code {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.watchlist-btn {
+  font-size: 24rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+  color: #666;
+  border: none;
+  line-height: 1.4;
+}
+
+.watchlist-btn.active {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.price-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12rpx 0;
+}
+
+.price-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.premium-label {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.price-value {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.price-large {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.divider {
+  height: 1rpx;
+  background: #f0f0f0;
+  margin: 8rpx 0;
+}
+
+.calc-method {
+  font-size: 22rpx;
+  color: #999;
+  display: block;
+  text-align: right;
+  margin-top: 8rpx;
+}
+
+.sub-card, .holding-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.sub-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 16rpx;
+}
+
+.sub-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.sub-row:last-child {
+  border-bottom: none;
+}
+
+.sub-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.sub-value {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.holding-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.holding-item:last-child {
+  border-bottom: none;
+}
+
+.holding-name {
+  font-size: 28rpx;
+  color: #333;
+  display: block;
+}
+
+.holding-code {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.holding-weight {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #1a1a2e;
+}
+
+.loading {
+  text-align: center;
+  padding: 60rpx;
+  color: #999;
+}

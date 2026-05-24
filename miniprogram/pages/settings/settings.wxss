@@ -1,0 +1,88 @@
+.container {
+  padding: 20rpx;
+}
+
+.section {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  padding: 24rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 16rpx;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.setting-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.setting-input {
+  width: 400rpx;
+  text-align: right;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-name {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.status-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}
+
+.status-dot.green {
+  background: #52c41a;
+}
+
+.status-dot.gray {
+  background: #d9d9d9;
+}
+
+.about-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.about-row:last-child {
+  border-bottom: none;
+}
+
+.about-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.about-value {
+  font-size: 28rpx;
+  color: #333;
+}

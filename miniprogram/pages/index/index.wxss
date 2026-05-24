@@ -1,0 +1,415 @@
+.container {
+  padding: 20rpx;
+  padding-bottom: 120rpx;
+}
+
+.search-bar {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 16rpx 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.search-input {
+  font-size: 28rpx;
+  height: 48rpx;
+}
+
+/* Tab bar */
+.tab-bar {
+  white-space: nowrap;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 12rpx 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.tab-item {
+  display: inline-block;
+  padding: 12rpx 24rpx;
+  margin-right: 12rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #666;
+  background: #f5f5f5;
+}
+
+.tab-item:last-child {
+  margin-right: 0;
+}
+
+.tab-item.active {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.tab-badge {
+  font-size: 20rpx;
+  margin-left: 6rpx;
+  opacity: 0.7;
+}
+
+.tab-item.active .tab-badge {
+  opacity: 1;
+}
+
+/* Sort buttons */
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.sort-buttons {
+  display: flex;
+  gap: 16rpx;
+}
+
+.sort-btn {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 12rpx;
+  background: #fff;
+  color: #666;
+}
+
+.sort-btn.active {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.sort-dir {
+  font-size: 20rpx;
+  margin-left: 4rpx;
+  color: #1a1a2e;
+}
+
+/* Filter bar secondary */
+.filter-bar-secondary {
+  background: #fafafa;
+  border-radius: 12rpx;
+  padding: 12rpx 16rpx;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-size: 22rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  background: #fff;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  border: 1rpx solid #e8e8e8;
+}
+
+.filter-btn.active {
+  background: #1a1a2e;
+  color: #fff;
+  border-color: #1a1a2e;
+}
+
+.filter-btn.clear-btn {
+  background: #fff1f0;
+  color: #ff4d4f;
+  border-color: #ffa39e;
+}
+
+.filter-btn.clear-btn:hover {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+.filter-dir {
+  font-size: 18rpx;
+  color: #1a1a2e;
+  font-weight: 500;
+}
+
+.filter-btn.active .filter-dir {
+  color: #fff;
+}
+
+/* Active filters */
+.active-filters {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+  padding: 12rpx 16rpx;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  flex-wrap: wrap;
+}
+
+.active-filter-tag {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  padding: 6rpx 12rpx;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 6rpx;
+  font-size: 20rpx;
+}
+
+.remove-tag {
+  color: #ff4d4f;
+  font-weight: 600;
+  padding: 0 2rpx;
+}
+
+.clear-all {
+  color: #ff4d4f;
+  font-size: 20rpx;
+  margin-left: auto;
+}
+
+/* Status bar */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+  padding: 0 10rpx;
+}
+
+.update-time {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.total-count {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* Fund cards */
+.fund-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.fund-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.fund-info {
+  flex: 1;
+}
+
+.fund-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  display: block;
+}
+
+.fund-code {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.fund-tags {
+  display: flex;
+  gap: 8rpx;
+  flex-shrink: 0;
+}
+
+.tag {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.tag-open {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.tag-closed {
+  background: #fff1f0;
+  color: #ff4d4f;
+}
+
+.tag-high-premium {
+  background: #fff2e8;
+  color: #fa541c;
+  font-weight: 600;
+}
+
+.tag-arbitrage {
+  background: #f6ffed;
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.sub-risk {
+  color: #ff4d4f;
+  font-size: 20rpx;
+  background: #fff1f0;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  margin: 0 2rpx;
+}
+
+.sub-settlement {
+  color: #1890ff;
+  font-size: 20rpx;
+}
+
+.sub-hint {
+  color: #999;
+  font-size: 20rpx;
+}
+
+/* Star button */
+.star-btn {
+  padding: 8rpx 12rpx;
+  margin-left: 8rpx;
+  flex-shrink: 0;
+}
+
+.star-filled {
+  font-size: 36rpx;
+  color: #faad14;
+}
+
+.star-empty {
+  font-size: 36rpx;
+  color: #d9d9d9;
+}
+
+.fund-data {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.data-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.data-value {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.sub-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx dashed #f0f0f0;
+  font-size: 22rpx;
+}
+
+.sub-label {
+  color: #666;
+}
+
+.sub-value {
+  font-weight: 500;
+}
+
+.sub-divider {
+  color: #ccc;
+  margin: 0 4rpx;
+}
+
+/* Arbitrage info */
+.arbitrage-info {
+  background: #fffbe6;
+  border-radius: 8rpx;
+  padding: 8rpx 12rpx;
+  margin-top: 12rpx;
+}
+
+.text-orange {
+  color: #fa8c16;
+  font-weight: 600;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 40rpx;
+  color: #999;
+}
+
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* Filter dropdown options */
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border-radius: 8rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  min-width: 160rpx;
+  z-index: 100;
+  margin-top: 8rpx;
+  overflow: hidden;
+}
+
+.filter-option {
+  padding: 16rpx 20rpx;
+  font-size: 24rpx;
+  color: #333;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.filter-option:last-child {
+  border-bottom: none;
+}
+
+.filter-option:hover {
+  background: #f5f5f5;
+}
+
+.filter-option.active {
+  background: #1a1a2e;
+  color: #fff;
+}

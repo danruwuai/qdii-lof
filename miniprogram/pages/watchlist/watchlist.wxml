@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="header">
+    <text class="title">我的监控</text>
+    <text class="count">共 {{funds.length}} 只</text>
+  </view>
+
+  <view class="fund-list" wx:if="{{!loading}}">
+    <view class="fund-card" wx:for="{{funds}}" wx:key="code">
+      <view class="fund-main" data-code="{{item.code}}" bindtap="onDetailTap">
+        <view class="fund-info">
+          <text class="fund-name">{{item.name}}</text>
+          <text class="fund-code">{{item.code}}</text>
+        </view>
+        <view class="fund-price">
+          <text class="price">{{item.price}}</text>
+          <text class="premium" style="color: {{item.premium_color}}">{{item.premium_rate}}</text>
+        </view>
+      </view>
+      <view class="fund-actions">
+        <button class="remove-btn" data-code="{{item.code}}" bindtap="removeWatch">移除</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && funds.length === 0}}">
+    <text>暂无监控基金，去行情页添加吧</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+</view>
