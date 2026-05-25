@@ -1,3 +1,0 @@
-<view class="badge" style="background: {{bgColor}}; color: {{color}}">
-  <text class="badge-text">{{rate}}%</text>
-</view>

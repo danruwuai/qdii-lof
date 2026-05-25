@@ -8,8 +8,9 @@ from sqlalchemy.orm import Session
 
 from database import SessionLocal
 from models import Fund, PremiumSnapshot
-from data_sources import akshare_source, jisilu_source
+from data_sources import akshare_source
 from data_sources import eastmoney_source
+from data_sources import fetch_qdii_list, fetch_lof_list  # 双源 fallback
 from data_sources.nav_source import get_fund_nav_multi_source
 from services.nav_calculator import calculate_premium
 from services.premium_service import cache_premium
@@ -35,10 +36,10 @@ def _safe_float(val):
 
 
 async def refresh_cn_quotes():
-    """刷新 A 股 ETF/LOF 实时行情（使用集思录的实时价格）"""
+    """刷新 A 股 ETF/LOF 实时行情（使用集思录的实时价格，HTTP 优先 + Playwright 降级）"""
     try:
-        qdii_data = await jisilu_source.fetch_qdii_list(config.JISILI_COOKIE)
-        lof_data = await jisilu_source.fetch_lof_list(config.JISILI_COOKIE)
+        qdii_data = await fetch_qdii_list(config.JISILI_COOKIE)
+        lof_data = await fetch_lof_list(config.JISILI_COOKIE)
     except Exception as e:
         print(f"[行情刷新] 集思录获取失败: {e}")
         return
@@ -133,9 +134,9 @@ async def refresh_fund_nav():
 
 
 async def refresh_subscription_status():
-    """刷新申购状态（从集思录，使用 Playwright 自动获取，支持 cookie）"""
-    qdii_data = await jisilu_source.fetch_qdii_list(config.JISILI_COOKIE)
-    lof_data = await jisilu_source.fetch_lof_list(config.JISILI_COOKIE)
+    """刷新申购状态（从集思录，HTTP 优先 + Playwright 降级）"""
+    qdii_data = await fetch_qdii_list(config.JISILI_COOKIE)
+    lof_data = await fetch_lof_list(config.JISILI_COOKIE)
 
     all_data = qdii_data + lof_data
     if not all_data:
