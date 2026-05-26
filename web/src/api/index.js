@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_BASE = import.meta.env.VITE_API_BASE || ''
+// 使用相对路径，由 Cloudflare Pages 代理到 Workers
+const API_BASE = ''
 
 const api = axios.create({
   baseURL: API_BASE,

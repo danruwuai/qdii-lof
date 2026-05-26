@@ -1,0 +1,19 @@
+name = "qdii-lof"
+main = "worker.js"
+compatibility_date = "2026-05-24"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "../web/dist"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "qdii-lof-db"
+database_id = "1ad141d7-f054-48aa-822e-008b980560e7"
+
+[triggers]
+crons = ["0 9 * * 1-5", "*/10 9-18 * * 1-5", "0 20 * * 1-5"]
+
+[observability]
+enabled = true
