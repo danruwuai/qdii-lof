@@ -1,13 +1,13 @@
 /**
  * Cloudflare Pages Function
- * 拦截所有请求，/api/* 代理到 Workers，其他返回静态文件
+ * 代理 /api/* 和 /health 请求到 Workers
  */
 
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
 
-  // /api/* 请求代理到 Workers
+  // /api/* 和 /health 请求代理到 Workers
   if (url.pathname.startsWith('/api/') || url.pathname === '/health') {
     // 提取 Workers 路径（去掉 /api 前缀）
     const workerPath = url.pathname.replace(/^\/api/, '');
