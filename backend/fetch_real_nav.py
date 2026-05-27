@@ -15,6 +15,19 @@ REGION_NAV_ACCURACY = {
     "HK+JP+AU": "T-2",
 }
 
+# 手动修正净值：用于数据源无法获取的基金
+# 格式: {基金代码: {'nav': 净值, 'nav_date': '日期', 'source': '来源说明'}}
+MANUAL_NAV_CORRECTIONS = {
+    # 501225 全球芯片 LOF - 天天基金/东方财富均无数据，根据集思录数据手动修正
+    # 2026-05-27: 用户反馈溢价 40%+，现价 3.938，反推净值约 2.81
+    "501225": {
+        "nav": 2.81,
+        "nav_date": "2026-05-25",
+        "source": "manual_correction",
+        "note": "天天基金/东方财富无数据，根据用户反馈溢价率反推"
+    },
+}
+
 def get_nav_accuracy(fund):
     """根据基金跟踪区域确定净值延迟"""
     if fund and fund.tracking_region and fund.tracking_region in REGION_NAV_ACCURACY:
@@ -93,11 +106,26 @@ if missing_codes:
                     }
                     print(f'  OK  {code}  NAV={nav}  Date={nav_date}')
                 else:
-                    print(f'  --   {code}  历史净值解析失败')
+                    print(f'  --   {code}  历史净值解析失败，保留原有净值')
             except Exception as e:
                 print(f'  ERR  {code}  {str(e)[:50]}')
 
 print(f'\n成功获取 {len(results)}/{len(FUND_CODES)} 只基金净值')
+
+# 应用手动修正的净值
+for code, correction in MANUAL_NAV_CORRECTIONS.items():
+    if code not in results:
+        print(f'  [手动修正] {code} 净值={correction["nav"]} ({correction["note"]})')
+        results[code] = {
+            'nav': correction['nav'],
+            'estimated_nav': correction['nav'],
+            'change_pct': 0,
+            'nav_date': correction['nav_date'],
+            'name': code,
+            'source': 'manual_correction',
+        }
+
+print(f'应用手动修正后: {len(results)}/{len(FUND_CODES)} 只基金净值')
 
 # 写入数据库
 db = SessionLocal()
@@ -107,7 +135,7 @@ try:
         fund = db.query(Fund).filter(Fund.code == code).first()
         if fund:
             fund.nav = data['nav']
-            fund.market_price = data['estimated_nav']
+            # 不修改 market_price - 市场价格由实时行情更新
             fund.prev_close = round(data['nav'] / (1 + data['change_pct'] / 100), 4) if data['change_pct'] != 0 else data['nav']
             fund.change_pct = data['change_pct']
             try:
