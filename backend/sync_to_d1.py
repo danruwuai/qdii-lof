@@ -101,11 +101,24 @@ def sync_table(table, full=False, since=None):
         with open(tmp_file, 'w', encoding='utf-8') as f:
             f.write(sql_content)
 
-        # 执行 wrangler d1 execute via Windows
+        # 执行 wrangler d1 execute
         import subprocess
+        import shutil
+        wrangler_path = shutil.which('wrangler')
+        if not wrangler_path:
+            # Try common paths
+            for p in ['/usr/local/bin/wrangler', '/usr/bin/wrangler', '/home/runner/.npm/bin/wrangler']:
+                if os.path.exists(p):
+                    wrangler_path = p
+                    break
+
+        if not wrangler_path:
+            print(f"    ERROR: wrangler not found in PATH")
+            continue
+
         result = subprocess.run(
-            ['C:/Users/zgj/AppData/Roaming/npm/wrangler.cmd', 'd1', 'execute', D1_PROJECT, '--remote', '--file', tmp_file],
-            capture_output=True, text=True, timeout=120, encoding='utf-8', errors='replace'
+            [wrangler_path, 'd1', 'execute', D1_PROJECT, '--remote', '--file', tmp_file],
+            capture_output=True, timeout=120
         )
 
         if result.returncode != 0:
