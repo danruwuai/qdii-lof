@@ -80,31 +80,48 @@ cd backend && python main.py
 
 ## 防循环机制
 
+### 项目级（代码中）
+
 执行可能重复的操作前，使用 `backend/anti_loop_guard.py` 检查：
 
 ```bash
-# 检查操作是否允许执行（重复超过 3 次会报错）
 python backend/anti_loop_guard.py check <operation_name>
-
-# 操作成功后重置计数器
 python backend/anti_loop_guard.py success <operation_name>
-
-# 查看守护状态
 python backend/anti_loop_guard.py status
-
-# 手动重置（遇到误触发时）
-python backend/anti_loop_guard.py reset <operation_name>
-python backend/anti_loop_guard.py reset          # 重置全部
+python backend/anti_loop_guard.py reset
 ```
 
-**Python 代码中使用**：
-```python
-from anti_loop_guard import LoopGuard
+### Claude Code 级（对话中）
 
-guard = LoopGuard("deploy_worker", max_repeats=3)
-guard.check_and_record()  # 超过阈值抛出 RuntimeError
-# ... 执行操作 ...
-guard.record_success()     # 成功后重置
+当 Claude 陷入循环时，**用户可以直接说**：
+
+> "检查循环守护状态"
+> "强制恢复"
+> "重置守护"
+
+Claude 会自动运行：
+```bash
+python3 .claude/loop_guard.py status   # 查看状态
+python3 .claude/loop_guard.py recover  # 强制恢复
+python3 .claude/loop_guard.py reset    # 重置全部
+```
+
+**工作原理**：
+- 每次工具调用前检查 `.claude/loop_guard.json`
+- 统计最近 30 分钟内每种工具的调用次数
+- 超过 3 次 → 标记为 BLOCKED，输出警告
+- 60 秒后自动恢复，或手动 `recover`
+
+**配置**（编辑 `.claude/loop_guard.json`）：
+```json
+{
+  "config": {
+    "max_repeats": 3,
+    "window_seconds": 1800,
+    "auto_recover": true,
+    "recover_delay_seconds": 60
+  }
+}
 ```
 
 **时间窗口**：默认 30 分钟，超过窗口后计数器自动重置。
