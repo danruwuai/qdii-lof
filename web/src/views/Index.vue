@@ -3,7 +3,9 @@ import { ref, computed, onMounted, watch } from 'vue'
 import FundCard from '../components/FundCard.vue'
 import { listFunds, searchFunds, getTabCounts } from '../api'
 import { useWatchStore } from '../stores'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const store = useWatchStore()
 
 // Tabs
@@ -85,7 +87,7 @@ function selectFund(code) {
   searchQuery.value = ''
   searchResults.value = []
   showSearch.value = false
-  window.location.href = `/detail/${code}`
+  router.push(`/detail/${code}`)
 }
 
 function tabLabel(tab) {

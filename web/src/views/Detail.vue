@@ -6,7 +6,7 @@ import { getFundDetail } from '../api'
 import { useWatchStore } from '../stores'
 
 const route = useRoute()
-const router = useRouter
+const router = useRouter()
 const store = useWatchStore()
 
 const fund = ref(null)

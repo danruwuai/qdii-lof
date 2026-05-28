@@ -6,10 +6,10 @@ const route = useRoute()
 const router = useRouter()
 
 const navItems = [
-  { name: 'index', label: '列表', icon: '📋' },
-  { name: 'watchlist', label: '监控', icon: '👁️' },
-  { name: 'alerts', label: '提醒', icon: '🔔' },
-  { name: 'settings', label: '设置', icon: '⚙️' },
+  { name: 'index', path: '/', label: '列表', icon: '📋' },
+  { name: 'watchlist', path: '/monitor', label: '监控', icon: '👁️' },
+  { name: 'alerts', path: '/alert', label: '提醒', icon: '🔔' },
+  { name: 'settings', path: '/setting', label: '设置', icon: '⚙️' },
 ]
 
 const activeIndex = computed(() => {
@@ -26,7 +26,7 @@ const activeIndex = computed(() => {
     <router-link
       v-for="(item, i) in navItems"
       :key="item.name"
-      :to="`/${item.name}`"
+      :to="item.path"
       :class="{ active: activeIndex === i }"
     >
       <span class="icon">{{ item.icon }}</span>

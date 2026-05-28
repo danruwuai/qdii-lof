@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-// 使用相对路径，由 Cloudflare Pages 代理到 Workers
-const API_BASE = ''
+// API 基础 URL - 根据部署环境配置
+// 本地开发: 空字符串（相对路径）
+// 生产环境: 需要配置为 Worker 的 URL
+const API_BASE = import.meta.env.VITE_API_BASE || ''
 
 const api = axios.create({
   baseURL: API_BASE,

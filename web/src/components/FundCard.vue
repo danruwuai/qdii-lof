@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useWatchStore } from '../stores'
 
 const props = defineProps({
@@ -7,7 +8,12 @@ const props = defineProps({
   compact: { type: Boolean, default: false }
 })
 
+const router = useRouter()
 const store = useWatchStore()
+
+function goToDetail() {
+  router.push(`/detail/${props.fund.code}`)
+}
 
 const premiumRate = computed(() => props.fund.premium?.premium_rate ?? null)
 const isHigh = computed(() => premiumRate.value !== null && premiumRate.value > 10)
@@ -33,7 +39,7 @@ function formatPct(n) {
 </script>
 
 <template>
-  <div class="fund-card" :class="{ compact }">
+  <div class="fund-card" :class="{ compact }" @click="goToDetail" style="cursor: pointer;">
     <div class="card-header">
       <div class="fund-info">
         <span class="code">{{ fund.code }}</span>
@@ -60,12 +66,15 @@ function formatPct(n) {
         <div class="price-item">
           <span class="label">净值</span>
           <span class="value">{{ formatNum(fund.nav) }}</span>
+          <span class="nav-date" v-if="fund.nav_date">{{ fund.nav_date }}</span>
+          <span class="nav-accuracy" v-if="fund.premium?.nav_accuracy">({{ fund.premium.nav_accuracy }})</span>
         </div>
         <div class="price-item premium">
           <span class="label">溢价率</span>
           <span class="value" :style="{ color: premiumColor() }">
             {{ premiumRate !== null ? (premiumRate > 0 ? `+${premiumRate.toFixed(2)}%` : `${premiumRate.toFixed(2)}%`) : '--' }}
           </span>
+          <span class="premium-note" v-if="fund.premium?.is_estimated" title="基于T+2净值估算">⚠️估算</span>
         </div>
       </div>
 

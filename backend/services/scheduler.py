@@ -77,12 +77,8 @@ async def refresh_cn_quotes():
                     fund.change_pct = index_chg
                     fund.prev_close = round(price / (1 + index_chg / 100), 4)
                     updated_chg += 1
-                # LOF 非指数基金：用 (price - 最新净值) / 最新净值 作为近似
-                # 注意：这实际上是溢价率，不是涨跌幅，但 LOF 没有更好数据源
-                elif fund.nav:
-                    fund.change_pct = round((price - fund.nav) / fund.nav * 100, 2)
-                    fund.prev_close = round(fund.nav, 4)
-                    updated_chg += 1
+                # 如果没有指数涨跌幅数据，保持原有 change_pct 不变（不随意覆盖）
+                # 避免用溢价率错误地当作涨跌幅
 
             # 更新净值（集思录净值比多数据源更全，作为补充）
             nav_val = _safe_float(nav)
