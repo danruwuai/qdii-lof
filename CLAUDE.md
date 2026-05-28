@@ -77,3 +77,34 @@ cd backend && python main.py
 - QDII 基金净值有 T+2 延迟，Type A 计算基于 T-2 NAV + 指数调整
 - 小程序 WebSocket 断连后有 5 秒自动重连机制
 - `index_mapper.py` 中的指数映射需要手动维护，新增基金需在此添加映射
+
+## 防循环机制
+
+执行可能重复的操作前，使用 `backend/anti_loop_guard.py` 检查：
+
+```bash
+# 检查操作是否允许执行（重复超过 3 次会报错）
+python backend/anti_loop_guard.py check <operation_name>
+
+# 操作成功后重置计数器
+python backend/anti_loop_guard.py success <operation_name>
+
+# 查看守护状态
+python backend/anti_loop_guard.py status
+
+# 手动重置（遇到误触发时）
+python backend/anti_loop_guard.py reset <operation_name>
+python backend/anti_loop_guard.py reset          # 重置全部
+```
+
+**Python 代码中使用**：
+```python
+from anti_loop_guard import LoopGuard
+
+guard = LoopGuard("deploy_worker", max_repeats=3)
+guard.check_and_record()  # 超过阈值抛出 RuntimeError
+# ... 执行操作 ...
+guard.record_success()     # 成功后重置
+```
+
+**时间窗口**：默认 30 分钟，超过窗口后计数器自动重置。
